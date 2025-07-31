@@ -70,14 +70,14 @@ const ProductDetail = () => {
                   >
                     <img
                       src={image}
-                      alt={${product.name} ${index + 1}}
+                      alt={`${product.name} ${index + 1}`}
                       className="w-full h-full object-cover"
                     />
                   </button>
                 ))}
               </div>
             )}
-          </div>
+          </div>
 
           {/* Product Info */}
           <div className="space-y-6">

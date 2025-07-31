@@ -6,7 +6,7 @@ import { useCart } from '../contexts/CartContext';
 import { Button } from '../components/ui/button';
 import { toast } from 'sonner';
 import { Heart, Share, ShoppingCart } from 'lucide-react';
-import { FindYourSizeWidgetWithoutSlider } from '@yoursizer/widget';
+import { FindYourSizerWidgetWithoutProfile } from '@yoursizer/widget';
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -15,6 +15,12 @@ const ProductDetail = () => {
   const [selectedColor, setSelectedColor] = useState<string>('');
   const [selectedImage, setSelectedImage] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(1);
+
+  const handleSizeRecommended = (result: { success: boolean; size: string; message?: string; error?: string }) => {
+    if (result.success && result.size) {
+      setSelectedSize(result.size);
+    }
+  };
 
   const product = products.find(p => p.id === id);
 
@@ -64,7 +70,7 @@ const ProductDetail = () => {
                   >
                     <img
                       src={image}
-                      alt={`${product.name} ${index + 1}`}
+                      alt={${product.name} ${index + 1}}
                       className="w-full h-full object-cover"
                     />
                   </button>
@@ -189,13 +195,13 @@ const ProductDetail = () => {
             clothingType="tshirt"
             /> */}
 
-            <FindYourSizeWidgetWithoutSlider
+            <FindYourSizerWidgetWithoutProfile
              productId={product.productId}
              brandId={product.brandId}
              clothingType={product.clothingType}
-             licenseKey="82deecca-28ad-4b4f-9ee7-615674686f89"
-              className='pt-16'
-              onAddToBag={handleAddToCart}
+             licenseStatus={{ isValid: true }}
+             licenseKey="04699749-9a29-4b18-9e30-e53b80018aad"
+             onSizeRecommended={handleSizeRecommended}
             />
 
             {/* Action Buttons */}
@@ -247,4 +253,4 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductDetail;
+export default ProductDetail;
